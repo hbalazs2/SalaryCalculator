@@ -1,5 +1,10 @@
-public class Worker extends Employee {
-    public Worker(int id, String name, String jobTitle, int workHours, int actuallyWorkedHours, int nonWorkedHours, int workingHoursMinusOvertimeHours) {
-        super(id, name, jobTitle, workHours, actuallyWorkedHours, nonWorkedHours, workingHoursMinusOvertimeHours);
+class Worker extends Employee {
+    public Worker(int employeeId, String name, int workingHoursPerDay, double hourlyRate, double overtimeRate) {
+        super(employeeId, name, "Worker", workingHoursPerDay, hourlyRate,  overtimeRate);
+    }
+
+    @Override
+    public int calculateSalary() {
+        return (int) (getWorkedHours() * getSalary() + getOvertimeHours() * getSalary() * (1 + getOvertimeRate()));
     }
 }
