@@ -25,6 +25,7 @@ public class Main {
     }
 
     public static void printSalaries(List<Employee> employees) {
+        employees.sort((e1, e2) -> e1.getName().compareTo(e2.getName()));
         System.out.println("Salaries:");
         for (Employee employee : employees) {
             int salary = employee.calculateSalary();
@@ -33,7 +34,7 @@ public class Main {
     }
 
     public static void printEmployeesByRemainingHours(List<Employee> employees) {
-        Collections.sort(employees, (e1, e2) -> e2.getRemainingHours() - e1.getRemainingHours());
+        employees.sort((e1, e2) -> e2.getRemainingHours() - e1.getRemainingHours());
         System.out.println("\nEmployees sorted by remaining hours:");
         for (Employee employee : employees) {
             System.out.println(employee.getName() + " - Remaining Hours: " + employee.getRemainingHours());
@@ -48,9 +49,9 @@ public class Main {
             int remainingHours = employee.getRemainingHours();
             if (remainingHours > 0) {
                 if (employee instanceof Manager) {
-                    totalLosses += (int) (remainingHours * (employee.getSalary() / 160));
+                    totalLosses += (int) (remainingHours * (((Manager) employee).getBaseSalary() / 160));
                 } else if (employee instanceof  Worker) {
-                    totalLosses += (int) (remainingHours * employee.getSalary());
+                    totalLosses += (int) (remainingHours * ((Worker) employee).getHourlyRate());
                 }
             }
         }
